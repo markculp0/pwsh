@@ -1,7 +1,7 @@
 
 ***
 
-## PowerShell
+## PowerShell (pwsh)
 
 ***
 
