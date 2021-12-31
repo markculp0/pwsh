@@ -183,9 +183,33 @@ pre code {
 <pre><code>
   function prompt 
   {
-    &quot;PS [$env:COMPUTERNAME]&gt; &quot;
+    &quot;PS: [$env:COMPUTERNAME
+    $host.UI.RawUI.WindowTitle = &quot;$(Get-Location)&quot;
   }
 </code></pre>
+<hr />
+</div>
+<div id="execute-program" class="section level4">
+<h4>Execute program</h4>
+<pre><code>  &amp; &#39;C:\Program Files\Notepad++\notepad++.exe&#39;
+  &amp; &#39;C:\Program Files\Google\Chrome\Application\chrome.exe&#39;
+  &amp; &#39;C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe&#39;
+</code></pre>
+<hr />
+</div>
+<div id="set-alias-for-program" class="section level4">
+<h4>Set-Alias for program</h4>
+<pre><code>  Set-Alias np &#39;C:\Program Files\Notepad++\notepad++.exe&#39;
+  Set-Alias crm &#39;C:\Program Files\Google\Chrome\Application\chrome.exe&#39;
+  Set-Alias edg &#39;C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe&#39;
+  </code></pre>
+<hr />
+</div>
+<div id="scripts" class="section level4">
+<h4>Scripts</h4>
+<ul>
+<li><a href="profile.ps1">profile.ps1</a></li>
+</ul>
 <hr />
 <hr />
 <hr />
