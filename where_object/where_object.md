@@ -15,7 +15,7 @@
 
 ***
 
-#### Get object like a specific value
+#### Get object like a specific value (-CLike = case insensitive)
 
 ```
   Get-ChildItem 
