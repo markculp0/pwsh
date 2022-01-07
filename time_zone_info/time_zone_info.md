@@ -82,6 +82,14 @@
   $utcTime = [TimeZoneInfo]::ConvertTime($indiaTime, $sourceTimeZone, $destTimeZone )
 
 ```
+***
+
+#### Script
+
+***
+
+* [time_zone_conversion_example.ps1](time_zone_conversion_example.ps1)
+* [time_zone_convert.ps1](time_zone_convert.ps1)
 
 ***
 ***

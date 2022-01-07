@@ -1,36 +1,64 @@
-#####################################
-## Convert from my time to India time 
-#####################################
+###################
+#
+# Get-MyTimeZones
+#
+# 2021-01-07, mac
+#
+###################
 
-# My DateTime object
-$sourceTime = [DateTime] "1/01/2022 4:00 PM"
+<# 
 
-# Target India time zone
-$targetTimeZone = [TimeZoneInfo]::GetSystemTimeZones() |
-  Where-Object Id -match India
+.SYNOPSIS
 
-# Convert to India time zone (2 arguments)
-$indiaTime = [TimeZoneInfo]::ConvertTime($sourceTime, $targetTimeZone)
+Get my working time zones
 
-Write-Host "`n" "India time:" $indiaTime
+#>
 
-# PS:>  India time: 1/2/2022 3:30:00 AM
+param(
+  ## First argument is optional
+  [String] $SomeDateTime = ""
+)
 
-##############################################
-## Convert from India's time to Univeral Time 
-##############################################
+Set-StrictMode -Version Latest
 
-# Source time zone 
-$sourceTimeZone = [TimeZoneInfo]::GetSystemTimeZones() |
-  Where-Object Id -match India 
+function Get-MyTimeZones 
+{
+  # My current date time and zone 
+  $currDateTime = Get-Date
+  $currTimeZone = Get-TimeZone
 
-# Destination time zone 
-$destTimeZone = [TimeZoneInfo]::GetSystemTimeZones() |
-  Where-Object Id -match "GMT Standard Time"
-
-# Convert from India to UTC time (3 arguments)
-$utcTime = [TimeZoneInfo]::ConvertTime($indiaTime, $sourceTimeZone, $destTimeZone )
+  # Convert to UTC
+  $utcTimeZone = [TimeZoneInfo]::GetSystemTimeZones() | 
+      Where-Object Id -match "GMT Standard Time"
+  $utcDateTime = [TimeZoneInfo]::ConvertTime($currDateTime, $utcTimeZone)
   
-Write-Host "   UTC time:" $utcTime "`n" 
+  # Convert to India Time 
+  $indiaTimeZone = [TimeZoneInfo]::GetSystemTimeZones() |
+      Where-Object Id -match India
+  $indiaDateTime = [TimeZoneInfo]::ConvertTime($currDateTime, $indiaTimeZone)
+  
+  # Convert to China Time 
+  $chinaTimeZone = [TimeZoneInfo]::GetSystemTimeZones() |
+      Where-Object Id -match China
+  $chinaDateTime = [TimeZoneInfo]::ConvertTime($currDateTime, $chinaTimeZone)
+  
+  
+  # Print date times to terminal ################
+  
+  # Current time
+  "  " + "{0:yyyy-MM-dd HH:mm:ss}" -f $currDateTime + " | " + $currTimeZone.BaseUtcOffset + " | "+ $currTimeZone.Id + " | " + "{0:dddd}" -f $currDateTime
+  
+  # UTC 
+  "  " + "{0:yyyy-MM-dd HH:mm:ss}" -f $utcDateTime  + " | "  + "+" + $utcTimeZone.BaseUtcOffset + " | " + $utcTimeZone.Id + "     | " + "{0:dddd}" -f $utcDateTime
+  
+  # India
+  "  " + "{0:yyyy-MM-dd HH:mm:ss}" -f $indiaDateTime  + " | "  + "+" + $indiaTimeZone.BaseUtcOffset + " | " + $indiaTimeZone.Id + "   | " + "{0:dddd}" -f $indiaDateTime
+  
+  # China
+  "  " + "{0:yyyy-MM-dd HH:mm:ss}" -f $chinaDateTime  + " | "  + "+" + $chinaTimeZone.BaseUtcOffset + " | " + $chinaTimeZone.Id + "   | " + "{0:dddd}" -f $chinaDateTime
+}
 
-# PS:>  UTC time: 1/1/2022 10:00:00 PM
+if ($SomeDateTime -eq "")
+{
+  Get-MyTimeZones
+} 
