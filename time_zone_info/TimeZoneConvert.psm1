@@ -1,3 +1,4 @@
+
 ###################
 #
 # Get-MyTimeZones
@@ -83,4 +84,12 @@ if ($SomeDateTime -eq "")
 {
   Get-MyTimeZones
 } 
+
+# Alternative names for command
+Set-Alias gmtz Get-MyTimeZones
+Set-Alias DomainSpecificVerb-Info Get-MyTimeZones
+
+# Export specific command 
+Export-ModuleMember -Function Get-MyTimeZones
+Export-ModuleMember -Alias gmtz,DomainSpecificVerb-Info
 

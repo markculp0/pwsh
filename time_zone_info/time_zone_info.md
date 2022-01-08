@@ -90,6 +90,7 @@
 
 * [time_zone_conversion_example.ps1](time_zone_conversion_example.ps1)
 * [time_zone_convert.ps1](time_zone_convert.ps1)
+* [TimeZoneConvert.psm1](TimeZoneConvert.psm1)
 
 ***
 ***
