@@ -22,7 +22,7 @@ param(
 
 Set-StrictMode -Version Latest
 
-
+# Private print format function
 function Print-MyTimeZones($instDateTime, $instTimeZone)
 {
   # Set time zone pad equal to 21 
@@ -44,10 +44,17 @@ function Print-MyTimeZones($instDateTime, $instTimeZone)
 }
 
 # Public function to list time zones
-function Get-MyTimeZones 
+function Get-MyTimeZones([String] $SomeDateTime) 
 {
-  # My current date time and zone 
-  $currDateTime = Get-Date
+  
+  # My current date time
+  if ($SomeDateTime -eq "") {
+    $currDateTime = Get-Date
+  } else {
+    $currDateTime = [DateTime] $SomeDateTime
+  }
+  
+  # My current time zone 
   $currTimeZone = Get-TimeZone
 
   # Convert to UTC
@@ -79,11 +86,6 @@ function Get-MyTimeZones
   
 }
 
-# Main program loop
-if ($SomeDateTime -eq "")
-{
-  Get-MyTimeZones
-} 
 
 # Alternative names for command
 Set-Alias gmtz Get-MyTimeZones

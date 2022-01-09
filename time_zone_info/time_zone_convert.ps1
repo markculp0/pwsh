@@ -45,8 +45,14 @@ function Print-MyTimeZones($instDateTime, $instTimeZone)
 # Public function to list time zones
 function Get-MyTimeZones 
 {
-  # My current date time and zone 
-  $currDateTime = Get-Date
+  # My current date time
+  if ($SomeDateTime -eq "") {
+    $currDateTime = Get-Date
+  } else {
+    $currDateTime = [DateTime] $SomeDateTime
+  }
+  
+  # My current time zone 
   $currTimeZone = Get-TimeZone
 
   # Convert to UTC
@@ -78,9 +84,7 @@ function Get-MyTimeZones
   
 }
 
-# Main program loop
-if ($SomeDateTime -eq "")
-{
-  Get-MyTimeZones
-} 
+
+Get-MyTimeZones
+
 
