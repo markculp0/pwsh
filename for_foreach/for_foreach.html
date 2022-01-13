@@ -168,13 +168,45 @@ pre code {
 
 
 <hr />
-<div id="for-foreach" class="section level2">
-<h2>for | foreach</h2>
+<div id="foreach-object-cmdlet" class="section level2">
+<h2>ForEach-Object cmdlet (%)</h2>
+</div>
+<div id="the-for-foreach-keywords-methods" class="section level2">
+<h2>The for | foreach keywords (methods)</h2>
 <hr />
+<div id="work-with-items-in-a-list" class="section level4">
+<h4>Work with items in a list</h4>
+<pre><code>  1..10 | % { $_ * 2}
+  
+  Get-Process | % Name | % ToUpper
+</code></pre>
+<hr />
+</div>
+<div id="foreach-with-script-blocks" class="section level4">
+<h4>ForEach with script blocks</h4>
+<pre><code>  # PSItem ($_)
+  Get-Process | ForEach-Object { $_.Name }
+  
+  # -Begin -Process -End parameters
+  $array = 1,2,3,4
+  $array | ForEach-Object {$sum = 0} {$sum += $_} {$sum}
+  </code></pre>
+<hr />
+</div>
+<div id="enumerate-properties" class="section level4">
+<h4>Enumerate properties</h4>
+<pre><code>  Start-Process pwsh
+  Start-Process pwsh
+  $processes = Get-Process -Name pwsh
+  $processes[0].Id
+  $processes.Id
+</code></pre>
+<hr />
+</div>
 <div id="write-3-lines" class="section level4">
 <h4>Write 3 lines</h4>
 <pre><code>  for ($i=0; $i -lt 3; $i++) {
-    Write-Host $i
+    Write-Host $i;
   }
   
   0
