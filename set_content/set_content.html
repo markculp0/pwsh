@@ -169,16 +169,11 @@ pre code {
 
 <hr />
 <div id="set-content" class="section level2">
-<h2>Set-Content (&gt;)</h2>
+<h2>Set-Content</h2>
 <hr />
-<div id="use-as-a-redirection-operator" class="section level4">
-<h4>Use as a redirection operator</h4>
-<pre><code>
-  echo &quot;Hey&quot; | Set-Content file.txt
-  
-  echo &quot;Hey&quot; &gt; file.txt
-  
-  echo &quot;Dude&quot; &gt;&gt; file.txt
+<div id="send-object-to-ascii-file" class="section level4">
+<h4>Send object to ASCII file</h4>
+<pre><code>  Get-ChildItem | Set-Content file.txt
   </code></pre>
 <hr />
 </div>
@@ -186,6 +181,7 @@ pre code {
 <h4>See also</h4>
 <ul>
 <li><a href="..\out_gridview\out_gridview.html">Out-GridView</a></li>
+<li><a href="..\out_file\out_file.html">Out-File</a></li>
 </ul>
 <hr />
 <hr />

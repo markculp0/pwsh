@@ -1,19 +1,14 @@
 
 ***
 
-## Set-Content (>)
+## Set-Content
 
 ***
 
-#### Use as a redirection operator
+#### Send object to ASCII file
 
 ```
-
-  echo "Hey" | Set-Content file.txt
-  
-  echo "Hey" > file.txt
-  
-  echo "Dude" >> file.txt
+  Get-ChildItem | Set-Content file.txt
   
 ```
 
@@ -22,6 +17,7 @@
 #### See also
 
 * [Out-GridView](..\out_gridview\out_gridview.html)
+* [Out-File](..\out_file\out_file.html)
 
 ***
 ***

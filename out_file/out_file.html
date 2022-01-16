@@ -169,14 +169,39 @@ pre code {
 
 <hr />
 <div id="out-file" class="section level2">
-<h2>Out-File</h2>
+<h2>Out-File (&gt;)</h2>
 <hr />
-<div id="write-ascii-text-to-file" class="section level4">
-<h4>Write ASCII text to file</h4>
-<pre><code>  Get-ChildItem 
-    | Select-Object -Property LastWriteTime, Name, Mode, Length 
-    | Out-File -FilePath ./dir_list.txt -Encoding ASCII 
+<div id="write-command-output-to-a-file" class="section level4">
+<h4>Write command output to a file</h4>
+<pre><code>  # UTF16
+  Get-ChildItem 
+    | Out-File utf16_file.txt
+
+  # If original file is ASCII
+  Get-Content .\file.txt
+    | Out-File ascii_file.txt -Encoding ASCII
+    
+  # Object to ASCII
+  Get-ChildItem | Set-Content .\dir_list.txt
 </code></pre>
+<hr />
+</div>
+<div id="shortcuts" class="section level4">
+<h4>Shortcuts</h4>
+<pre><code>  # UTF16
+  gci &gt; utf16_file.txt
+  
+  # ASCII to ASCII
+  gc .\file.txt &gt; ascii_file.txt -e ascii
+  
+  # Append
+  gc .\file.txt &gt;&gt; ascii_file.txt -e ascii
+</code></pre>
+<hr />
+</div>
+<div id="see-also" class="section level4">
+<h4>See also</h4>
+<p><a href="..\set_content\set_content.html">Set-Content</a></p>
 <hr />
 <hr />
 </div>
