@@ -11,7 +11,7 @@
 
 
 
-<title>index</title>
+<title>adsi</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,20 +362,80 @@ pre code {
 
 
 <hr />
-<div id="powershell-pwsh" class="section level2">
-<h2>PowerShell (pwsh)</h2>
+<div id="active-directory-service-interfaces-adsi" class="section level2">
+<h2>Active Directory Service Interfaces <em>[adsi]</em></h2>
 <hr />
-<div id="cmdlets" class="section level4">
-<h4>cmdlets</h4>
+<div id="test-an-active-directory-instance" class="section level4">
+<h4>Test an Active Directory instance</h4>
 <hr />
-<p>| <a href="convertfrom_string\convertfrom_string.html">convertfrom_string</a>
-| <a href="copy_item\copy_item.html">copy_item</a> | <a href="for_foreach\for_foreach.html">for_foreach</a> | <a href="format_hex\format_hex.html">format_hex</a> | <a href="get_childitem\get_childitem.html">get_childitem</a> | <a href="get_content\get_content.html">get_content</a> | <a href="get_help\get_help.html">get_help</a> | <a href="get_history\get_history.html">get_history</a> | <a href="group_object\group_object.html">group_object</a> | <a href="module\module.html">module</a> | <a href="new_item\new_item.html">new_item</a> | <a href="out_file\out_file.html">out_file</a> | <a href="out_gridview\out_gridview.html">out_gridview</a> | <a href="profile_prompt\profile_prompt.html">profile prompt</a> | <a href="read_write_host\read_write_host.html">read_write_host</a> | <a href="regex\regex.html">regex</a> | <a href="set_content\set_content.html">set_content</a> | <a href="time_zone_info\time_zone_info.html">time_zone_info</a> | <a href="where_object\where_object.html">where_object</a> | <a href="write_output\write_output.html">write_output</a> |</p>
+<pre><code>  ps:&gt; [adsi] &quot;LDAP://localhost:389/dc=Fabrikam,dc=COM&quot;
+  
+    distinguishedName : {DC=Fabrikam,DC=com}
+    Path              : LDAP://localhost:389/dc=Fabrikam,dc=COM
+</code></pre>
 <hr />
 </div>
-<div id="type-shortcuts" class="section level4">
-<h4>Type shortcuts</h4>
+<div id="create-an-organizational-unit" class="section level4">
+<h4>Create an Organizational Unit</h4>
 <hr />
-<p><a href="ad\adsi.html">adsi</a></p>
+<pre><code>  $domain = [adsi] &quot;LDAP://localhost:389/dc=Fabrikam,dc=COM&quot;
+  $salesOrg = $domain.Create(&quot;OrganizationalUnit&quot;, &quot;OU=Sales&quot;)
+  $salesOrg.Put(&quot;Description&quot;, &quot;Sales Headquarters, SF&quot;)
+  $salesOrg.Put(&quot;wwwHomePage&quot;, &quot;http://fabrikam.com/sales&quot;)
+  $salesOrg.SetInfo()
+  
+</code></pre>
+<hr />
+</div>
+<div id="create-divisions-within-the-sales-ou" class="section level4">
+<h4>Create divisions within the Sales OU</h4>
+<hr />
+<pre><code>  $sales = [adsi] &quot;LDAP://localhost:389/ou=Sales,dc=Fabrikam,dc=COM&quot;
+  
+  $east = $sales.Create(&quot;OrganizationalUnit&quot;,&quot;OU=East&quot;)
+  $east.Put(&quot;wwwHomePage&quot;, &quot;http://fabrikam.com/sales/east&quot;)
+  $east.SetInfo()
+  
+  $west = $sales.Create(&quot;OrganizationalUnit&quot;,&quot;OU=West&quot;)
+  $west.Put(&quot;wwwHomePage&quot;, &quot;http://fabrikam.com/sales/west&quot;)
+  $west.SetInfo()
+  
+  $north = $sales.Create(&quot;OrganizationalUnit&quot;,&quot;OU=North&quot;)
+  $north.Put(&quot;wwwHomePage&quot;, &quot;http://fabrikam.com/sales/north&quot;)
+  $north.SetInfo()
+
+</code></pre>
+<hr />
+</div>
+<div id="get-properties-of-an-ou" class="section level4">
+<h4>Get properties of an OU</h4>
+<hr />
+<pre><code>  $orgUnit = [adsi] &quot;LDAP://localhost:389/ou=West,ou=Sales,dc=Fabrikam,dc=COM&quot;
+  $orgUnit | Format-List *
+
+    objectClass           : {top, organizationalUnit}
+    ou                    : {West}
+    distinguishedName     : {OU=West,OU=Sales,DC=Fabrikam,DC=com}
+    instanceType          : {4}
+    whenCreated           : {4/13/2022 2:02:47 AM}
+    whenChanged           : {4/13/2022 2:02:47 AM}
+    ...
+    wWWHomePage           : {http://fabrikam.com/sales/west}
+    name                  : {West}
+    objectGUID            : {161 171 89 225 213 75 209 67 175 31 188 7 250 0 230 161}
+    objectCategory        : {CN=Organizational-Unit,CN=Schema,CN=Configuration,CN={E0C20E76-1DD2-472C-8D33-043049304C89}}
+    dSCorePropagationData : {1/1/1601 12:00:00 AM}
+    ...
+    Parent                : LDAP://localhost:389/ou=Sales,dc=Fabrikam,dc=COM
+    Password              :
+    Path                  : LDAP://localhost:389/ou=West,ou=Sales,dc=Fabrikam,dc=COM
+    Properties            : {objectClass, ou,     distinguishedName, instanceType…}
+    SchemaClassName       : organizationalUnit
+    ...
+    
+</code></pre>
+<hr />
+<hr />
 <hr />
 <hr />
 </div>
