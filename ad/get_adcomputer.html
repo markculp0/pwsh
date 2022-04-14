@@ -11,7 +11,7 @@
 
 
 
-<title>index</title>
+<title>get_adcomputer</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,20 +362,149 @@ pre code {
 
 
 <hr />
-<div id="powershell-pwsh" class="section level2">
-<h2>PowerShell (pwsh)</h2>
+<div id="get-adcomputer" class="section level2">
+<h2>Get-ADComputer</h2>
 <hr />
-<div id="cmdlets" class="section level4">
-<h4>cmdlets</h4>
+<ul>
+<li><a href="#syntax">Syntax</a></li>
+<li><a href>Get-ADUser</a></li>
+<li><a href>Get-ADDomain</a></li>
+<li><a href>Get-ADGroup</a></li>
+<li><a href>Get-ADForest</a></li>
+</ul>
 <hr />
-<p>| <a href="convertfrom_string\convertfrom_string.html">convertfrom_string</a>
-| <a href="copy_item\copy_item.html">copy_item</a> | <a href="for_foreach\for_foreach.html">for_foreach</a> | <a href="format_hex\format_hex.html">format_hex</a> | <a href="ad\get_adcomputer.html">get_adcomputer</a> | <a href="get_childitem\get_childitem.html">get_childitem</a> | <a href="get_content\get_content.html">get_content</a> | <a href="get_help\get_help.html">get_help</a> | <a href="get_history\get_history.html">get_history</a> | <a href="group_object\group_object.html">group_object</a> | <a href="module\module.html">module</a> | <a href="new_item\new_item.html">new_item</a> | <a href="out_file\out_file.html">out_file</a> | <a href="out_gridview\out_gridview.html">out_gridview</a> | <a href="profile_prompt\profile_prompt.html">profile prompt</a> | <a href="read_write_host\read_write_host.html">read_write_host</a> | <a href="regex\regex.html">regex</a> | <a href="set_content\set_content.html">set_content</a> | <a href="time_zone_info\time_zone_info.html">time_zone_info</a> | <a href="where_object\where_object.html">where_object</a> | <a href="write_output\write_output.html">write_output</a> |</p>
+<div id="get-specific-computer-and-show-all-properties" class="section level4">
+<h4>Get specific computer and show all properties</h4>
+<pre><code>  Get-ADComputer -Identity &quot;User01-SRV1&quot; -Properties *
+  
+  AccountExpirationDate              : 
+  accountExpires                     : 9223372036854775807
+  AccountLockoutTime                 : 
+  AccountNotDelegated                : False
+  AllowReversiblePasswordEncryption  : False
+</code></pre>
 <hr />
 </div>
-<div id="type-shortcuts" class="section level4">
-<h4>Type shortcuts</h4>
+<div id="get-all-computers-with-a-name-starting-with-a-particular-string" class="section level4">
+<h4>Get all computers with a name starting with a particular string</h4>
 <hr />
-<p><a href="ad\adsi.html">adsi</a></p>
+<ul>
+<li>Format-Table -AutoSize</li>
+</ul>
+<pre><code>  Get-ADComputer -Filter &#39;Name -like &quot;User01*&quot;&#39; -Properties IPv4Address 
+    | FT Name,DNSHostName,IPv4Address -A
+    
+  name        dnshostname            ipv4address
+  ----        -----------            -----------
+  User01-SRV1 User01-SRV1.User01.com 10.194.99.181
+  User01-SRV2 User01-SRV2.User01.com 10.194.100.3
+    </code></pre>
+<hr />
+</div>
+<div id="gets-all-computers-changing-their-passwords-in-specific-time-frame" class="section level4">
+<h4>Gets all computers changing their passwords in specific time
+frame</h4>
+<hr />
+<pre><code>  $Date = [DateTime]::Today.AddDays(-90)
+  Get-ADComputer -Filter &#39;PasswordLastSet -ge $Date&#39; -Properties PasswordLastSet 
+    | FT Name,PasswordLastSet
+    
+  Name                PasswordLastSet
+  ----                ---------------
+  USER01-SRV4         3/12/2009 6:40:37 PM
+  USER01-SRV5         3/12/2009 7:05:45 PM
+</code></pre>
+<hr />
+</div>
+<div id="get-computer-accounts-in-a-specific-location-using-an-ldapfilter" class="section level4">
+<h4>Get computer accounts in a specific location using an
+LDAPFilter</h4>
+<hr />
+<pre><code>  Get-ADComputer -LDAPFilter &quot;(name=*laptop*)&quot; -SearchBase &quot;CN=Computers,DC= User01,DC=com&quot;
+  
+  name
+  ----
+  pattiful-laptop
+  davidche-laptop
+
+</code></pre>
+<hr />
+</div>
+<div id="get-all-computer-accounts-using-a-filter" class="section level4">
+<h4>Get all computer accounts using a filter</h4>
+<hr />
+<pre><code>  Get-ADComputer -Filter *
+</code></pre>
+<hr />
+</div>
+<div id="get-all-computers-with-a-name-starting-with-computer01-or-computer02" class="section level4">
+<h4>Get all computers with a name starting with Computer01 or
+Computer02</h4>
+<hr />
+<pre><code>  Get-ADComputer -Filter &#39;Name -like &quot;Computer01*&quot; 
+    -or Name -like &quot;Computer02*&quot;&#39; 
+    -Properties IPv4Address 
+    | FT Name,DNSHostName,IPv4Address -A
+  
+  name            dnshostname                    ipv4address
+  ----            -----------                    -----------
+  Computer01-SRV1 Computer01-SRV1.Computer01.com 10.194.99.181
+  Computer02-SRV2 Computer02-SRV2.Computer02.com 10.194.100.3
+</code></pre>
+<hr />
+</div>
+<div id="get-all-computers-with-a-name-starting-with-a-string-and-password-last-set-before-30-days" class="section level4">
+<h4>Get all computers with a name starting with a string AND password
+last set before 30 days</h4>
+<hr />
+<pre><code>  $Date = [DateTime]::Today.AddDays(-30)
+  Get-ADComputer -Filter &#39;Name -like &quot;Computer01*&quot; 
+    -and PasswordLastSet -ge $Date&#39;
+    -Properties IPv4Address 
+    | FT Name,DNSHostName,IPv4Address -A
+  
+  name        dnshostname            ipv4address
+  ----        -----------            -----------
+  Computer01-SRV1 Computer01-SRV1.Computer01.com 10.194.99.181
+</code></pre>
+<hr />
+</div>
+<div id="syntax" class="section level4">
+<h4>Syntax</h4>
+<hr />
+<pre><code>Get-ADComputer
+   [-AuthType &lt;ADAuthType&gt;]
+   [-Credential &lt;PSCredential&gt;]
+   -Filter &lt;String&gt;
+   [-Properties &lt;String[]&gt;]
+   [-ResultPageSize &lt;Int32&gt;]
+   [-ResultSetSize &lt;Int32&gt;]
+   [-SearchBase &lt;String&gt;]
+   [-SearchScope &lt;ADSearchScope&gt;]
+   [-Server &lt;String&gt;]
+   [&lt;CommonParameters&gt;]
+   
+Get-ADComputer
+   [-AuthType &lt;ADAuthType&gt;]
+   [-Credential &lt;PSCredential&gt;]
+   [-Identity] &lt;ADComputer&gt;
+   [-Partition &lt;String&gt;]
+   [-Properties &lt;String[]&gt;]
+   [-Server &lt;String&gt;]
+   [&lt;CommonParameters&gt;]
+   
+Get-ADComputer
+   [-AuthType &lt;ADAuthType&gt;]
+   [-Credential &lt;PSCredential&gt;]
+   -LDAPFilter &lt;String&gt;
+   [-Properties &lt;String[]&gt;]
+   [-ResultPageSize &lt;Int32&gt;]
+   [-ResultSetSize &lt;Int32&gt;]
+   [-SearchBase &lt;String&gt;]
+   [-SearchScope &lt;ADSearchScope&gt;]
+   [-Server &lt;String&gt;]
+   [&lt;CommonParameters&gt;]
+   </code></pre>
 <hr />
 <hr />
 </div>

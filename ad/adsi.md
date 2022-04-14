@@ -5,6 +5,10 @@
 
 ***
 
+* [AD Lightweight Dir Srvcs](ad_lightweight_dir_srvcs.html)
+
+***
+
 #### Test an Active Directory instance 
 
 ***
