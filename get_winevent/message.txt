@@ -1,0 +1,52 @@
+Process terminated:
+RuleName: -
+UtcTime: 2022-04-17 16:14:40.632
+ProcessGuid: {ae45bd26-3cf0-625c-8b24-000000001900}
+ProcessId: 11624
+Image: C:\Program Files\ExpressConnect\ExpressConnect.exe
+User: TINMAN\markc
+Process Create:
+RuleName: -
+UtcTime: 2022-04-17 16:14:40.621
+ProcessGuid: {ae45bd26-3cf0-625c-8b24-000000001900}
+ProcessId: 11624
+Image: C:\Program Files\ExpressConnect\ExpressConnect.exe
+FileVersion: 2.0.173.0
+Description: ExpressConnect
+Product: ExpressConnect
+Company: Rivet Networks LLC
+OriginalFileName: ExpressConnect.exe
+CommandLine: ExpressConnect.exe -u
+CurrentDirectory: C:\Program Files\ExpressConnect\
+User: TINMAN\markc
+LogonGuid: {ae45bd26-1a15-625c-7d54-0d0600000000}
+LogonId: 0x60D547D
+TerminalSessionId: 4
+IntegrityLevel: Medium
+Hashes: SHA256=61F0CC4FBF471BDF671DC0F913B78BF2C132C9C08651F7E37F5E29DC81CA014D
+ParentProcessGuid: {ae45bd26-e4d3-6258-8b00-000000001900}
+ParentProcessId: 1320
+ParentImage: C:\Program Files\ExpressConnect\ExpressConnect.exe
+ParentCommandLine: "ExpressConnect.exe"
+ParentUser: NT AUTHORITY\SYSTEM
+Process terminated:
+RuleName: -
+UtcTime: 2022-04-17 16:14:28.787
+ProcessGuid: {ae45bd26-3c1d-625c-7e24-000000001900}
+ProcessId: 1832
+Image: C:\Program Files\Google\Chrome\Application\chrome.exe
+User: TINMAN\markc
+Process terminated:
+RuleName: -
+UtcTime: 2022-04-17 16:14:24.827
+ProcessGuid: {ae45bd26-3a72-625c-3224-000000001900}
+ProcessId: 15176
+Image: C:\Program Files\Google\Chrome\Application\chrome.exe
+User: TINMAN\markc
+Process terminated:
+RuleName: -
+UtcTime: 2022-04-17 16:14:10.361
+ProcessGuid: {ae45bd26-3cd2-625c-8a24-000000001900}
+ProcessId: 4852
+Image: C:\Program Files\ExpressConnect\ExpressConnect.exe
+User: TINMAN\markc

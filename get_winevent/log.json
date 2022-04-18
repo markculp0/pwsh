@@ -1,0 +1,42 @@
+[
+  {
+    "TimeCreated": "2022-04-17T11:14:40.6393136-05:00",
+    "Id": 5,
+    "LevelDisplayName": "Information",
+    "MachineName": "tinman",
+    "ProviderName": "Microsoft-Windows-Sysmon",
+    "Message": "Process terminated:\r\nRuleName: -\r\nUtcTime: 2022-04-17 16:14:40.632\r\nProcessGuid: {ae45bd26-3cf0-625c-8b24-000000001900}\r\nProcessId: 11624\r\nImage: C:\\Program Files\\ExpressConnect\\ExpressConnect.exe\r\nUser: TINMAN\\markc"
+  },
+  {
+    "TimeCreated": "2022-04-17T11:14:40.6253506-05:00",
+    "Id": 1,
+    "LevelDisplayName": "Information",
+    "MachineName": "tinman",
+    "ProviderName": "Microsoft-Windows-Sysmon",
+    "Message": "Process Create:\r\nRuleName: -\r\nUtcTime: 2022-04-17 16:14:40.621\r\nProcessGuid: {ae45bd26-3cf0-625c-8b24-000000001900}\r\nProcessId: 11624\r\nImage: C:\\Program Files\\ExpressConnect\\ExpressConnect.exe\r\nFileVersion: 2.0.173.0\r\nDescription: ExpressConnect\r\nProduct: ExpressConnect\r\nCompany: Rivet Networks LLC\r\nOriginalFileName: ExpressConnect.exe\r\nCommandLine: ExpressConnect.exe -u\r\nCurrentDirectory: C:\\Program Files\\ExpressConnect\\\r\nUser: TINMAN\\markc\r\nLogonGuid: {ae45bd26-1a15-625c-7d54-0d0600000000}\r\nLogonId: 0x60D547D\r\nTerminalSessionId: 4\r\nIntegrityLevel: Medium\r\nHashes: SHA256=61F0CC4FBF471BDF671DC0F913B78BF2C132C9C08651F7E37F5E29DC81CA014D\r\nParentProcessGuid: {ae45bd26-e4d3-6258-8b00-000000001900}\r\nParentProcessId: 1320\r\nParentImage: C:\\Program Files\\ExpressConnect\\ExpressConnect.exe\r\nParentCommandLine: \"ExpressConnect.exe\"\r\nParentUser: NT AUTHORITY\\SYSTEM"
+  },
+  {
+    "TimeCreated": "2022-04-17T11:14:28.7876008-05:00",
+    "Id": 5,
+    "LevelDisplayName": "Information",
+    "MachineName": "tinman",
+    "ProviderName": "Microsoft-Windows-Sysmon",
+    "Message": "Process terminated:\r\nRuleName: -\r\nUtcTime: 2022-04-17 16:14:28.787\r\nProcessGuid: {ae45bd26-3c1d-625c-7e24-000000001900}\r\nProcessId: 1832\r\nImage: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\r\nUser: TINMAN\\markc"
+  },
+  {
+    "TimeCreated": "2022-04-17T11:14:24.8301711-05:00",
+    "Id": 5,
+    "LevelDisplayName": "Information",
+    "MachineName": "tinman",
+    "ProviderName": "Microsoft-Windows-Sysmon",
+    "Message": "Process terminated:\r\nRuleName: -\r\nUtcTime: 2022-04-17 16:14:24.827\r\nProcessGuid: {ae45bd26-3a72-625c-3224-000000001900}\r\nProcessId: 15176\r\nImage: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\r\nUser: TINMAN\\markc"
+  },
+  {
+    "TimeCreated": "2022-04-17T11:14:10.3685959-05:00",
+    "Id": 5,
+    "LevelDisplayName": "Information",
+    "MachineName": "tinman",
+    "ProviderName": "Microsoft-Windows-Sysmon",
+    "Message": "Process terminated:\r\nRuleName: -\r\nUtcTime: 2022-04-17 16:14:10.361\r\nProcessGuid: {ae45bd26-3cd2-625c-8a24-000000001900}\r\nProcessId: 4852\r\nImage: C:\\Program Files\\ExpressConnect\\ExpressConnect.exe\r\nUser: TINMAN\\markc"
+  }
+]
