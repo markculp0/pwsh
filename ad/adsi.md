@@ -94,12 +94,49 @@
 
 ```
 
-
-***
 ***
 
+#### Create a User Account
 
+***
 
+```
+  $salesWest = [adsi] "LDAP://localhost:389/ou=West,ou=Sales,dc=Fabrikam,dc=COM"
+  
+  $user = $salesWest.Create("User", "CN=MyerKen")
+  
+  $user.Put("userPrincipalName", "Ken.Myer@fabrikam.com")
+  
+  $user.Put("displayName", "Ken Myer")
+  
+  $user.SetInfo()
+
+```
+
+***
+
+#### Search for a User Account
+
+***
+
+```
+  $domain = [adsi] "LDAP://localhost:389/dc=Fabrikam,dc=COM"
+
+  $searcher = [adsisearcher] $domain
+  
+  $searcher.Filter = '(&(objectClass=User)(displayName=Ken Myer))'
+  
+  $userResult = $searcher.FindOne()
+  
+  $user = $userResult.GetDirectoryEntry()
+  
+  $user
+  
+  distinguishedName : {CN=MyerKen,OU=West,OU=Sales,DC=Fabrikam,DC=com}
+  Path              : LDAP://localhost:389/CN=MyerKen,OU=West,OU=Sales,DC=Fabrikam,DC=com
+  
+
+```
 
 ***
 ***

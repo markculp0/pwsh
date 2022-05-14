@@ -440,7 +440,40 @@ Srvcs</a></li>
     
 </code></pre>
 <hr />
+</div>
+<div id="create-a-user-account" class="section level4">
+<h4>Create a User Account</h4>
 <hr />
+<pre><code>  $salesWest = [adsi] &quot;LDAP://localhost:389/ou=West,ou=Sales,dc=Fabrikam,dc=COM&quot;
+  
+  $user = $salesWest.Create(&quot;User&quot;, &quot;CN=MyerKen&quot;)
+  
+  $user.Put(&quot;userPrincipalName&quot;, &quot;Ken.Myer@fabrikam.com&quot;)
+  
+  $user.Put(&quot;displayName&quot;, &quot;Ken Myer&quot;)
+  
+  $user.SetInfo()
+</code></pre>
+<hr />
+</div>
+<div id="search-for-a-user-account" class="section level4">
+<h4>Search for a User Account</h4>
+<hr />
+<pre><code>  $domain = [adsi] &quot;LDAP://localhost:389/dc=Fabrikam,dc=COM&quot;
+
+  $searcher = [adsisearcher] $domain
+  
+  $searcher.Filter = &#39;(&amp;(objectClass=User)(displayName=Ken Myer))&#39;
+  
+  $userResult = $searcher.FindOne()
+  
+  $user = $userResult.GetDirectoryEntry()
+  
+  $user
+  
+  distinguishedName : {CN=MyerKen,OU=West,OU=Sales,DC=Fabrikam,DC=com}
+  Path              : LDAP://localhost:389/CN=MyerKen,OU=West,OU=Sales,DC=Fabrikam,DC=com
+</code></pre>
 <hr />
 <hr />
 </div>
