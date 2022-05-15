@@ -17,7 +17,7 @@
 
 ***
 
-* [adsi](ad\adsi.html)
+* [[adsi]](ad\adsi.html)
 
 ***
 
@@ -26,6 +26,14 @@
 ***
 
 * [Environment variables](env/env.html)
+
+***
+
+#### Miscellaneous
+
+***
+
+* [Script execution policies](misc/exe_pol.html)
 
 
 ***
