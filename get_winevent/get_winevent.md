@@ -8,7 +8,13 @@
 * Export Security log to CSV
 
 ```
+  # pwsh
   get-winevent -log security -max 5 | select -p TimeCreated,Message | epcsv -path my.csv
+  
+  # wevtutil
+  wevtutil epl Security c:\temp\sec.bak.evtx
+  
+  # see logparser script
   
 ```
 
@@ -37,7 +43,19 @@
 
 ``` 
 
+***
 
+#### Scripts
+
+***
+
+Export log with wevtutil
+
+* [export-eventlog.ps1](export-eventlog.ps1)
+
+Parse log with logparser
+
+* [get-sec4628evtlog.ps1](get-sec4628evtlog.ps1)
 
 
 ***

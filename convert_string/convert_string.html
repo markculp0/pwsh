@@ -11,7 +11,7 @@
 
 
 
-<title>convertfrom_string</title>
+<title>convert_string</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -366,16 +366,15 @@ pre code {
 
 
 <hr />
-<div id="convertfrom-string-pwsh-awk" class="section level2">
-<h2>ConvertFrom-String (pwsh awk)</h2>
+<div id="convert-string-pwsh-sed" class="section level2">
+<h2>Convert-String (pwsh sed)</h2>
 <hr />
-<div id="convert-string-to-object" class="section level4">
-<h4>Convert string to object</h4>
-<pre><code>  $d = &quot;[ ]+(?=\d|Services|Console)&quot;
-
-  $output = tasklist | Select -Skip 3 | ConvertFrom-String -Delimiter $d
+<div id="replacement-example-may-work-some-day" class="section level4">
+<h4>Replacement example (may work some day)</h4>
+<pre><code>  $phone = &quot;5551212&quot;, &quot;2112132&quot;, &quot;8752113&quot;, &quot;4524587&quot;
+  $example = &quot;5551212 = (425) 555-1212&quot;, &quot;2112132 = (425) 211-2132&quot;, &quot;8752113 = (425) 875-2113&quot;
+  $phone | Convert-String -Example $example
   
-  $output | Format-Table
 </code></pre>
 <hr />
 <hr />

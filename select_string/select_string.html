@@ -11,7 +11,7 @@
 
 
 
-<title>convertfrom_string</title>
+<title>select_string</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -366,16 +366,12 @@ pre code {
 
 
 <hr />
-<div id="convertfrom-string-pwsh-awk" class="section level2">
-<h2>ConvertFrom-String (pwsh awk)</h2>
+<div id="select-string-alias-sls-pwsh-grep" class="section level2">
+<h2>Select-String (alias sls; pwsh grep)</h2>
 <hr />
-<div id="convert-string-to-object" class="section level4">
-<h4>Convert string to object</h4>
-<pre><code>  $d = &quot;[ ]+(?=\d|Services|Console)&quot;
-
-  $output = tasklist | Select -Skip 3 | ConvertFrom-String -Delimiter $d
-  
-  $output | Format-Table
+<div id="grep-piped-output" class="section level4">
+<h4>Grep piped output</h4>
+<pre><code>  Get-Service | Out-String -Stream | Select-String Sysmon
 </code></pre>
 <hr />
 <hr />

@@ -254,6 +254,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 .main-container {
   max-width: 940px;
@@ -274,6 +275,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -368,7 +372,13 @@ pre code {
 <ul>
 <li>Export Security log to CSV</li>
 </ul>
-<pre><code>  get-winevent -log security -max 5 | select -p TimeCreated,Message | epcsv -path my.csv
+<pre><code>  # pwsh
+  get-winevent -log security -max 5 | select -p TimeCreated,Message | epcsv -path my.csv
+  
+  # wevtutil
+  wevtutil epl Security c:\temp\sec.bak.evtx
+  
+  # see logparser script
   </code></pre>
 <hr />
 <ul>
@@ -390,7 +400,20 @@ pre code {
   
 </code></pre>
 <hr />
+<div id="scripts" class="section level4">
+<h4>Scripts</h4>
 <hr />
+<p>Export log with wevtutil</p>
+<ul>
+<li><a href="export-eventlog.ps1">export-eventlog.ps1</a></li>
+</ul>
+<p>Parse log with logparser</p>
+<ul>
+<li><a href="get-sec4628evtlog.ps1">get-sec4628evtlog.ps1</a></li>
+</ul>
+<hr />
+<hr />
+</div>
 </div>
 
 
