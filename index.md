@@ -36,6 +36,8 @@
 
 * [MS Code Keyboard Shortcuts](_pdf/keyboard-shortcuts-windows.pdf)
 
+* [Emmet Cheatsheet](_pdf/emmet-cheatsheet-a5.pdf)
+
 * [Script execution policies](misc/exe_pol.html)
 
 
