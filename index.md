@@ -34,6 +34,8 @@
 
 ***
 
+* [MS Code Keyboard Shortcuts](_pdf/keyboard-shortcuts-windows.pdf)
+
 * [Script execution policies](misc/exe_pol.html)
 
 
