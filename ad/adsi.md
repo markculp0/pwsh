@@ -5,6 +5,13 @@
 
 ***
 
+* **Type Shortcut:** ```[adsi]```
+
+* **Full classname:** ```[System.DirectoryServices.DirectoryEntry]```
+
+
+***
+
 * [AD Lightweight Dir Srvcs](ad_lightweight_dir_srvcs.html)
 
 * [LDP](ldp.html) | [ADSI Edit](adsi_edit.html)

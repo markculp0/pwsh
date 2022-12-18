@@ -11,7 +11,7 @@
 
 
 
-<title>index</title>
+<title>bitshift</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -366,51 +366,48 @@ pre code {
 
 
 <hr />
-<div id="powershell-pwsh" class="section level2">
-<h2>PowerShell (pwsh)</h2>
+<div id="bit-shifting-and-byte-arrays" class="section level2">
+<h2>Bit shifting and Byte arrays</h2>
 <hr />
-<div id="overview" class="section level4">
-<h4>Overview</h4>
-<hr />
-<p><a href="overview/version_info.html">Version Info</a> | <a href="overview/provider.html">Providers</a> | <a href="overview/dot_net.html">.Net Objects</a> | <a href="overview/loop.html">Looping Flow</a> | <a href="overview/bitshift.html">Bit Shifting</a> | <a href="overview/strings.html">Strings</a> | <a href="regex/regex.html">Regex</a></p>
-<hr />
-</div>
-<div id="cmdlets" class="section level4">
-<h4>Cmdlets</h4>
-<hr />
-<p><a href="convert_string\convert_string.html">convert-string (sed)</a>
-| <a href="convertfrom_string\convertfrom_string.html">convertfrom_string
-(awk)</a> | <a href="copy_item\copy_item.html">copy_item</a> | <a href="for_foreach\for_foreach.html">for_foreach</a> | <a href="format_hex\format_hex.html">format_hex</a> | <a href="ad\get_adcomputer.html">get_adcomputer</a> | <a href="get_childitem\get_childitem.html">get_childitem</a> | <a href="get_content\get_content.html">get_content</a> | <a href="get_help\get_help.html">get_help</a> | <a href="get_history\get_history.html">get_history</a> | <a href="get_member\get_member.html">get_member</a> | |<a href="get_winevent\get_winevent.html">get_winevent</a> | <a href="group_object\group_object.html">group_object</a> | <a href="module\module.html">module</a> | <a href="new_item\new_item.html">new_item</a> | <a href="out_file\out_file.html">out_file (&gt;)</a> | <a href="out_gridview\out_gridview.html">out_gridview</a> | <a href="profile_prompt\profile_prompt.html">profile prompt</a> | <a href="read_write_host\read_write_host.html">read_write_host</a> | <a href="regex\regex.html">regex</a> | <a href="set_content\set_content.html">set_content</a> | <a href="select_string\select_string.html">select_string (grep)</a> | <a href="time_zone_info\time_zone_info.html">time_zone_info</a> | <a href="where_object\where_object.html">where_object</a> | <a href="write_output\write_output.html">write_output</a></p>
-<hr />
-</div>
-<div id="type-shortcuts" class="section level4">
-<h4>Type shortcuts</h4>
-<hr />
-<p><a href="ad/adsi.html">[Adsi]</a> | <a href="type_shortcut/float.html">[Float]</a> | <a href="type_shortcut/hashtable.html">[Hashtable]</a> | <a href="type_shortcut/int.html">[Int]</a> | <a href="type_shortcut/ipaddress.html">[IPAddress]</a> | <a href="type_shortcut/long.html">[Long]</a></p>
-<hr />
-</div>
-<div id="objects" class="section level4">
-<h4>Objects</h4>
-<hr />
-<ul>
-<li><a href="env/env.html">Environment variables</a></li>
-</ul>
-<hr />
-</div>
-<div id="miscellaneous" class="section level4">
-<h4>Miscellaneous</h4>
-<hr />
-<ul>
-<li><p><a href="_pdf/keyboard-shortcuts-windows.pdf">MS Code Keyboard
-Shortcuts</a></p></li>
-<li><p><a href="_pdf/emmet-cheatsheet-a5.pdf">Emmet
-Cheatsheet</a></p></li>
-<li><p><a href="misc/exe_pol.html">Script execution
-policies</a></p></li>
-</ul>
+<pre><code>[byte[]] $bytes = 1..10 
+$bytes[1]
+
+2
+----------------------------------------------------------------
+$bytes| Format-Hex
+
+Offset Bytes                                           
+00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+------ -----------------------------------------------
+  0000000000000000 01 02 03 04 05 06 07 08 09 0A          
+----------------------------------------------------------------
+[Byte[]] $hex = 0x01,0x00
+$hex[0]
+
+1
+----------------------------------------------------------------
+# Shift left
+$hex[0] -shl 2
+
+4
+----------------------------------------------------------------
+$hx = 0x01
+$hx = $hx -shl 8
+
+&quot;Dec is &quot; + $hx 
+
+Dec is 256
+----------------------------------------------------------------
+&quot;Hex is {0:X4}&quot; -f $hx[0]
+
+Hex is 0100
+----------------------------------------------------------------
+$hx[0].GetType().ToString()
+
+System.Int32
+</code></pre>
 <hr />
 <hr />
-</div>
 </div>
 
 

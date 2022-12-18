@@ -11,7 +11,7 @@
 
 
 
-<title>index</title>
+<title>strings</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -366,51 +366,158 @@ pre code {
 
 
 <hr />
-<div id="powershell-pwsh" class="section level2">
-<h2>PowerShell (pwsh)</h2>
+<div id="strings" class="section level2">
+<h2>Strings</h2>
 <hr />
-<div id="overview" class="section level4">
-<h4>Overview</h4>
+<p><strong>Single quotes are non-expanding literal strings</strong></p>
+<pre><code>$mystr = &#39;Some pwsh chars: $, `, &quot; and {}&#39;
+$mystr
+
+Some pwsh chars: $, `, &quot; and {}
+</code></pre>
 <hr />
-<p><a href="overview/version_info.html">Version Info</a> | <a href="overview/provider.html">Providers</a> | <a href="overview/dot_net.html">.Net Objects</a> | <a href="overview/loop.html">Looping Flow</a> | <a href="overview/bitshift.html">Bit Shifting</a> | <a href="overview/strings.html">Strings</a> | <a href="regex/regex.html">Regex</a></p>
+<p><strong>Double quotes support variable expansion</strong></p>
+<pre><code>$var = &quot;Sid&quot;
+$mystr = &quot;Hello $var, hope all is well.`nSincerely,`nBub&quot;
+$mystr
+
+Hello Sid, hope all is well.
+Sincerely,
+Bub
+</code></pre>
 <hr />
-</div>
-<div id="cmdlets" class="section level4">
-<h4>Cmdlets</h4>
+<p><strong>Escape sequences with backticks</strong></p>
+<pre><code>$str = &quot;Name&quot;
+$str2 = &quot;Age&quot;
+$str3 = $str + &quot;`t&quot; + $str2 + &quot;`n&quot;
+$str4 = &quot;$(&#39;-&#39; * $str.Length)&quot; + &quot;`t&quot; + 
+    &quot;$(&#39;-&#39; * $str2.Length)&quot; + &quot;`n&quot;
+$str5 = $str3 + $str4 
+$str5 
+
+Name    Age
+----    ---
+</code></pre>
 <hr />
-<p><a href="convert_string\convert_string.html">convert-string (sed)</a>
-| <a href="convertfrom_string\convertfrom_string.html">convertfrom_string
-(awk)</a> | <a href="copy_item\copy_item.html">copy_item</a> | <a href="for_foreach\for_foreach.html">for_foreach</a> | <a href="format_hex\format_hex.html">format_hex</a> | <a href="ad\get_adcomputer.html">get_adcomputer</a> | <a href="get_childitem\get_childitem.html">get_childitem</a> | <a href="get_content\get_content.html">get_content</a> | <a href="get_help\get_help.html">get_help</a> | <a href="get_history\get_history.html">get_history</a> | <a href="get_member\get_member.html">get_member</a> | |<a href="get_winevent\get_winevent.html">get_winevent</a> | <a href="group_object\group_object.html">group_object</a> | <a href="module\module.html">module</a> | <a href="new_item\new_item.html">new_item</a> | <a href="out_file\out_file.html">out_file (&gt;)</a> | <a href="out_gridview\out_gridview.html">out_gridview</a> | <a href="profile_prompt\profile_prompt.html">profile prompt</a> | <a href="read_write_host\read_write_host.html">read_write_host</a> | <a href="regex\regex.html">regex</a> | <a href="set_content\set_content.html">set_content</a> | <a href="select_string\select_string.html">select_string (grep)</a> | <a href="time_zone_info\time_zone_info.html">time_zone_info</a> | <a href="where_object\where_object.html">where_object</a> | <a href="write_output\write_output.html">write_output</a></p>
+<p><strong>Concatenate strings with +</strong></p>
+<pre><code>$a = &quot;I am a Viking &quot;
+$b = &quot;of some note. &quot;
+$c = &quot;`nNewt&#39;s my name &quot;
+$d = &quot;and here I float.&quot;
+$str = $a + $b + $c + $d 
+$str 
+
+I am a Viking of some note. 
+Newt&#39;s my name and here I float.
+</code></pre>
 <hr />
-</div>
-<div id="type-shortcuts" class="section level4">
-<h4>Type shortcuts</h4>
+<p><strong>Multiline strings are contained within At symbols
+(@)</strong></p>
+<pre><code>$str = @&quot;
+Toward a wisdom, 
+Beyond the shelf.
+Toward a dream, 
+that dreams itself.
+&quot;@
+$str 
+
+Toward a wisdom, 
+Beyond the shelf.
+Toward a dream,
+that dreams itself.
+</code></pre>
 <hr />
-<p><a href="ad/adsi.html">[Adsi]</a> | <a href="type_shortcut/float.html">[Float]</a> | <a href="type_shortcut/hashtable.html">[Hashtable]</a> | <a href="type_shortcut/int.html">[Int]</a> | <a href="type_shortcut/ipaddress.html">[IPAddress]</a> | <a href="type_shortcut/long.html">[Long]</a></p>
+<p><strong>Subexpressions are contained within $()</strong></p>
+<pre><code>$header = &quot;My Important Header&quot;
+$mystr = &quot;$header`n$(&#39;-&#39; * $header.Length)&quot;
+$mystr
+
+My Important Header
+-------------------
+</code></pre>
 <hr />
-</div>
-<div id="objects" class="section level4">
-<h4>Objects</h4>
+<p><strong>Formatting strings</strong></p>
+<pre><code>$num1 = 10
+$num2 = 25
+&quot;{0} divided by {1} is {2}&quot; -f $num1, $num2, ($num1 / $num2)
+
+10 divided by 25 is 0.4
+</code></pre>
 <hr />
-<ul>
-<li><a href="env/env.html">Environment variables</a></li>
-</ul>
+<p><strong>Standard format strings</strong></p>
+<pre><code>{0,8:C} = currency | {0,8:X} = hex | {0,8:F2} = fixed decimal point
+{0,8:D4} = decimal | {0,8:N3} = number 
+--------------------------------------------------------------------
+# Fixed point
+$n = 100.1033
+&quot;{0,8:F2}&quot; -f $n
+
+100.10
+--------------------------------------------------------------------
+# Decimal
+$n = 1100
+&quot;{0,8:D4}&quot; -f $n
+
+1100
+--------------------------------------------------------------------
+# Number
+$n = 1mb
+&quot;{0,8:N3}&quot; -f $n
+
+1,048,576.000
+
+</code></pre>
 <hr />
-</div>
-<div id="miscellaneous" class="section level4">
-<h4>Miscellaneous</h4>
+<p><strong>Specify column width</strong></p>
+<pre><code>$n1 = 300
+$n2 = 44.5
+&quot;{0,8}`t{1,6}&quot; -f &quot;Quantity&quot;, &quot;Price&quot;
+&quot;$(&#39;-&#39; * 8)`t&quot; + &quot;$(&#39;-&#39; * 7)&quot;
+&quot;{0,8}`t{1,7:C}&quot; -f $n1, $n2
+
+Quantity         Price
+--------        -------
+     300         $44.50
+</code></pre>
 <hr />
-<ul>
-<li><p><a href="_pdf/keyboard-shortcuts-windows.pdf">MS Code Keyboard
-Shortcuts</a></p></li>
-<li><p><a href="_pdf/emmet-cheatsheet-a5.pdf">Emmet
-Cheatsheet</a></p></li>
-<li><p><a href="misc/exe_pol.html">Script execution
-policies</a></p></li>
-</ul>
+<p><strong>Search a string</strong></p>
+<pre><code># Match DOS-like wildcard
+&quot;Hey Bub&quot; -like &quot;Hey*&quot;
+
+True
+-----------------------------
+# Match regex
+&quot;Hey Bub&quot; -match &quot;^\S{3}\s.*&quot;
+
+True
+-----------------------------
+# Contains specifc string
+&quot;Hey Bub&quot;.Contains(&quot;Bu&quot;)
+
+True
+-----------------------------
+# Find index of character
+&quot;Hey Bub&quot;.IndexOf(&quot;B&quot;)
+
+4
+</code></pre>
+<hr />
+<p><strong>String output to file</strong></p>
+<pre><code>$txt = &quot;Sad Dad&quot;
+$txt | Out-File dad.txt 
+gc dad.txt 
+
+Sad Dad
+</code></pre>
+<p><strong>Split a string</strong></p>
+<pre><code>$env:PSModulePath -split &#39;;&#39;
+
+C:\Program Files\PowerShell\Modules
+c:\program files\powershell\7\Modules
+c:\Users\markc\.vscode\extensions\ms-vscode.powershell-2022.12.1\modules
+</code></pre>
 <hr />
 <hr />
-</div>
 </div>
 
 

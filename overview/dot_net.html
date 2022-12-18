@@ -11,7 +11,7 @@
 
 
 
-<title>index</title>
+<title>dot_net</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -366,51 +366,201 @@ pre code {
 
 
 <hr />
-<div id="powershell-pwsh" class="section level2">
-<h2>PowerShell (pwsh)</h2>
+<div id="net-objects" class="section level2">
+<h2>.Net Objects</h2>
 <hr />
-<div id="overview" class="section level4">
-<h4>Overview</h4>
+<p><strong>Call a Static Method</strong></p>
+<pre><code>[Classname]::MethodName(parameter list)
+[System.Diagnostics.Process]::GetProcessById(0)
+
+ NPM(K)    PM(M)      WS(M)     CPU(s)      Id  SI ProcessName
+ ------    -----      -----     ------      --  -- -----------
+      0     0.06       0.01       0.00       0   0 Idle
+
+[System.DateTime]::Now
+
+</code></pre>
 <hr />
-<p><a href="overview/version_info.html">Version Info</a> | <a href="overview/provider.html">Providers</a> | <a href="overview/dot_net.html">.Net Objects</a> | <a href="overview/loop.html">Looping Flow</a> | <a href="overview/bitshift.html">Bit Shifting</a> | <a href="overview/strings.html">Strings</a> | <a href="regex/regex.html">Regex</a></p>
+<p><strong>List a Static Method’s constructors</strong></p>
+<pre><code>[System.Diagnostics.Process]::GetProcessById
+
+OverloadDefinitions
+-------------------
+static System.Diagnostics.Process GetProcessById(int processId, string machineName)
+static System.Diagnostics.Process GetProcessById(int processId)
+</code></pre>
 <hr />
-</div>
-<div id="cmdlets" class="section level4">
-<h4>Cmdlets</h4>
+<p><strong>Access a Static Property</strong></p>
+<pre><code>[System.Diagnostics.Process].Assembly
+
+GAC    Version        Location
+---    -------        --------
+False  v4.0.30319     C:\Program Files\PowerShell\7\System.Diagnostics.Process.dll
+
+[System.Management.Automation.PSCredential].Assembly 
+
+GAC    Version        Location
+---    -------        --------
+False  v4.0.30319     C:\Program Files\PowerShell\7\System.Management.Automation.dll
+</code></pre>
 <hr />
-<p><a href="convert_string\convert_string.html">convert-string (sed)</a>
-| <a href="convertfrom_string\convertfrom_string.html">convertfrom_string
-(awk)</a> | <a href="copy_item\copy_item.html">copy_item</a> | <a href="for_foreach\for_foreach.html">for_foreach</a> | <a href="format_hex\format_hex.html">format_hex</a> | <a href="ad\get_adcomputer.html">get_adcomputer</a> | <a href="get_childitem\get_childitem.html">get_childitem</a> | <a href="get_content\get_content.html">get_content</a> | <a href="get_help\get_help.html">get_help</a> | <a href="get_history\get_history.html">get_history</a> | <a href="get_member\get_member.html">get_member</a> | |<a href="get_winevent\get_winevent.html">get_winevent</a> | <a href="group_object\group_object.html">group_object</a> | <a href="module\module.html">module</a> | <a href="new_item\new_item.html">new_item</a> | <a href="out_file\out_file.html">out_file (&gt;)</a> | <a href="out_gridview\out_gridview.html">out_gridview</a> | <a href="profile_prompt\profile_prompt.html">profile prompt</a> | <a href="read_write_host\read_write_host.html">read_write_host</a> | <a href="regex\regex.html">regex</a> | <a href="set_content\set_content.html">set_content</a> | <a href="select_string\select_string.html">select_string (grep)</a> | <a href="time_zone_info\time_zone_info.html">time_zone_info</a> | <a href="where_object\where_object.html">where_object</a> | <a href="write_output\write_output.html">write_output</a></p>
+<p><strong>Create an instance of a .Net object</strong></p>
+<pre><code>$gen = New-Object System.Random 
+$gen.NextDouble()
+
+0.988195330473978
+-----------------------------------
+$gen.GetType().ToString() 
+
+System.Random
+-----------------------------------
+$hi = [System.String]::new(&quot;HI&quot;)
+$hi 
+
+HI
+-----------------------------------
+$str = New-Object System.String &quot;hi&quot;
+$str.Length
+
+2
+</code></pre>
 <hr />
-</div>
-<div id="type-shortcuts" class="section level4">
-<h4>Type shortcuts</h4>
+<p><strong>Create a Generic Object</strong> (int, string)</p>
+<pre><code>$num = New-Object System.Collections.ObjectModel.Collection[int]
+
+$num.Add(1) 
+$num.Add(2)
+$num 
+
+1
+2
+</code></pre>
 <hr />
-<p><a href="ad/adsi.html">[Adsi]</a> | <a href="type_shortcut/float.html">[Float]</a> | <a href="type_shortcut/hashtable.html">[Hashtable]</a> | <a href="type_shortcut/int.html">[Int]</a> | <a href="type_shortcut/ipaddress.html">[IPAddress]</a> | <a href="type_shortcut/long.html">[Long]</a></p>
+<p><strong>Create multiparameter Generic Object</strong></p>
+<pre><code>$map = New-Object &quot;System.Collections.Generic.Dictionary[Int,String]&quot;
+$map.Add(1,&quot;Bill&quot;);  
+
+$map.Values
+
+
+Bill
+
+</code></pre>
 <hr />
-</div>
-<div id="objects" class="section level4">
-<h4>Objects</h4>
+<p><strong>Get Instance Members of an Object</strong></p>
+<pre><code>$myObj = &quot;My Object&quot;
+
+# Same as $myObj | gm
+Get-Member -InputObject $myObj
+
+
+Name                 MemberType            Definition
+----                 ----------            ----------
+Clone                Method                System.Object Clone(), System.Object ICloneable.Clone()
+...
+</code></pre>
+<hr />
+<p><strong>Get Static Instance Members of an Object</strong></p>
+<pre><code>Get-Member -Static -InputObject $myObj
+
+
+
+   TypeName: System.String
+
+Name               MemberType Definition
+----               ---------- ----------
+Compare            Method     static int Compare(string strA, string strB), static int Compare(st…
+CompareOrdinal     Method     static int CompareOrdinal(string strA, string strB), static int Com…
+Concat             Method     static string Concat(System.Object arg0), static string Concat(System…
+
+</code></pre>
+<hr />
+<p><strong>Find the type of an object</strong></p>
+<pre><code>$myObj.GetType().ToString()
+
+
+System.String
+</code></pre>
 <hr />
 <ul>
-<li><a href="env/env.html">Environment variables</a></li>
+<li>Now look up type at <a href="https://docs.microsoft.com/dotnet" class="uri">https://docs.microsoft.com/dotnet</a></li>
 </ul>
 <hr />
-</div>
-<div id="miscellaneous" class="section level4">
-<h4>Miscellaneous</h4>
+<p><strong>Get properties and methods of the type</strong></p>
+<pre><code>[System.String] | gm 
+
+
+   TypeName: System.String
+
+Name               MemberType Definition
+----               ---------- ----------
+Compare            Method     static int Compare(string strA, string strB), static int Comp… 
+CompareOrdinal     Method     static int CompareOrdinal(string strA, string strB), static i… 
+Concat             Method     static string Concat(System.Object arg0), static …
+
+
+# Just get properties
+[System.String] | gm  -MemberType Property 
+
+# just get methods 
+[System.String] | gm  -MemberType Method
+
+</code></pre>
 <hr />
-<ul>
-<li><p><a href="_pdf/keyboard-shortcuts-windows.pdf">MS Code Keyboard
-Shortcuts</a></p></li>
-<li><p><a href="_pdf/emmet-cheatsheet-a5.pdf">Emmet
-Cheatsheet</a></p></li>
-<li><p><a href="misc/exe_pol.html">Script execution
-policies</a></p></li>
-</ul>
+<p><strong>Get members and properties of the collection class itself
+(,)</strong></p>
+<pre><code>
+# Don&#39;t want each item in the collection
+$files = gci 
+,$files | gm 
+
+   TypeName: System.Object[]
+
+Name           MemberType            Definition
+----           ----------            ----------
+Add            Method                int IList.Add(System.Object value)
+Address        Method                System.Object&amp;, System.Private.CoreLib, Version=7.0.0.… 
+</code></pre>
+<hr />
+<p><strong>Add custom methods and properties</strong></p>
+<pre><code>$ob = New-Object System.Object
+$ob | Add-Member NickName &quot;Obie&quot;
+$ob | gm
+
+Name        MemberType   Definition
+----        ----------   ----------
+Equals      Method       bool Equals(System.Object obj)
+GetHashCode Method       int GetHashCode()
+GetType     Method       type GetType()
+ToString    Method       string ToString()
+NickName    NoteProperty string NickName=Obie
+
+---
+$ob.NickName
+
+Obie
+</code></pre>
+<hr />
+<p><strong>Create and initialize a custom object</strong></p>
+<pre><code>$ob = [PSCustomObject]@{
+    &#39;Name&#39; = &#39;Bub&#39;;
+    &#39;NickName&#39; = &#39;Bubba&#39;;
+}
+
+gm -InputObject $ob 
+
+
+Name        MemberType   Definition
+----        ----------   ----------
+Equals      Method       bool Equals(System.Object obj)
+GetHashCode Method       int GetHashCode()
+GetType     Method       type GetType()
+ToString    Method       string ToString()
+Name        NoteProperty string Name=Bub
+NickName    NoteProperty string NickName=Bubba
+</code></pre>
 <hr />
 <hr />
-</div>
 </div>
 
 
