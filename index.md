@@ -15,7 +15,8 @@
 [Looping Flow](overview/loop.html) |
 [Bit Shifting](overview/bitshift.html) | 
 [Strings](overview/strings.html) |
-[Regex](regex/regex.html)
+[Regex](regex/regex.html) |
+[Math](overview/math.html)
 
 ***
 

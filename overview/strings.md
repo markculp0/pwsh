@@ -210,6 +210,91 @@ c:\Users\markc\.vscode\extensions\ms-vscode.powershell-2022.12.1\modules
 
 ```
 
+***
+
+**Replace a string**
+
+```
+"Hey Bub".Replace("Bub","Bill") 
+$str = "Happy Day"
+$str.Replace("Day","Hanukkah")
+
+Hey Bill
+Happy Hanukkah
+
+```
+
+***
+
+**Join strings**
+
+```
+-join  ("A","B","C") 
+
+ABC
+----------------------------------------------
+("A","B","C") -join "`r`n"
+
+A
+B
+C
+----------------------------------------------
+1..5 | Join-String -DoubleQuote -Separator ','
+
+"1","2","3","4","5"
+
+```
+
+***
+
+**Convert string to uppercase/lowercase**
+
+```
+$str = "Bad Dog"
+$str.ToUpper()
+
+BAD DOG
+---------------
+$str.ToLower()
+
+bad dog
+---------------
+$str = "hey joe"
+$str -replace '\b(\w)', { $_.Value.ToUpper() }
+
+Hey Joe
+
+```
+
+***
+
+**Trim whitespace from a string**
+
+```
+$str = "`t  I need to lose weight  `t"
+"|" + $str.Trim() + "|"
+
+|I need to lose weight|
+
+```
+
+***
+
+**Format a date**
+
+```
+$dttm = [DateTime] "03/15/2020 12:30:00"
+$dttm.ToString("yyyy-mm-dd hh:mm:ss")
+
+2020-30-15 12:30:00
+----------------------------------------
+"{0:yyyy-mm-dd hh:mm:ss}" -f $dttm 
+
+2020-30-15 12:30:00
+
+```
+
+
 
 ***
 ***

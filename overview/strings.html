@@ -517,6 +517,65 @@ c:\program files\powershell\7\Modules
 c:\Users\markc\.vscode\extensions\ms-vscode.powershell-2022.12.1\modules
 </code></pre>
 <hr />
+<p><strong>Replace a string</strong></p>
+<pre><code>&quot;Hey Bub&quot;.Replace(&quot;Bub&quot;,&quot;Bill&quot;) 
+$str = &quot;Happy Day&quot;
+$str.Replace(&quot;Day&quot;,&quot;Hanukkah&quot;)
+
+Hey Bill
+Happy Hanukkah
+</code></pre>
+<hr />
+<p><strong>Join strings</strong></p>
+<pre><code>-join  (&quot;A&quot;,&quot;B&quot;,&quot;C&quot;) 
+
+ABC
+----------------------------------------------
+(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;) -join &quot;`r`n&quot;
+
+A
+B
+C
+----------------------------------------------
+1..5 | Join-String -DoubleQuote -Separator &#39;,&#39;
+
+&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;
+</code></pre>
+<hr />
+<p><strong>Convert string to uppercase/lowercase</strong></p>
+<pre><code>$str = &quot;Bad Dog&quot;
+$str.ToUpper()
+
+BAD DOG
+---------------
+$str.ToLower()
+
+bad dog
+---------------
+$str = &quot;hey joe&quot;
+$str -replace &#39;\b(\w)&#39;, { $_.Value.ToUpper() }
+
+Hey Joe
+</code></pre>
+<hr />
+<p><strong>Trim whitespace from a string</strong></p>
+<pre><code>$str = &quot;`t  I need to lose weight  `t&quot;
+&quot;|&quot; + $str.Trim() + &quot;|&quot;
+
+|I need to lose weight|
+</code></pre>
+<hr />
+<p><strong>Format a date</strong></p>
+<pre><code>$dttm = [DateTime] &quot;03/15/2020 12:30:00&quot;
+$dttm.ToString(&quot;yyyy-mm-dd hh:mm:ss&quot;)
+
+2020-30-15 12:30:00
+----------------------------------------
+&quot;{0:yyyy-mm-dd hh:mm:ss}&quot; -f $dttm 
+
+2020-30-15 12:30:00
+</code></pre>
+<hr />
 <hr />
 </div>
 
